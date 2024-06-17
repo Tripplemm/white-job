@@ -1,0 +1,47 @@
+<!-- HTML -->
+<div class="profile-tabs">
+    <ul id="profile-list">
+        <!-- profiles will be loaded here -->
+    </ul>
+</div>
+
+<!-- JavaScript -->
+<script>
+    const profileList = document.getElementById('profile-list');
+
+    // function to load profiles from API or database
+    function loadProfiles() {
+        // assume we have a API endpoint or database that returns an array of profiles
+        const profiles = [
+            { id: 1, name: 'Profile 1', image: 'profile1.jpg', details: 'Details 1', reviews: 'Reviews 1' },
+            { id: 2, name: 'Profile 2', image: 'profile2.jpg', details: 'Details 2', reviews: 'Reviews 2' },
+            { id: 3, name: 'Profile 3', image: 'profile3.jpg', details: 'Details 3', reviews: 'Reviews 3' },
+            //...
+        ];
+
+        // clear the profile list
+        profileList.innerHTML = '';
+
+        // create a new list item for each profile
+        profiles.forEach((profile) => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <a href="profile${profile.id}.html">
+                    <div class="profile-tab">
+                        <img src="${profile.image}" alt="${profile.name}">
+                        <h2>${profile.name}</h2>
+                        <p>Details: ${profile.details}</p>
+                        <p>Reviews: ${profile.reviews}</p>
+                    </div>
+                </a>
+            `;
+            profileList.appendChild(listItem);
+        });
+    }
+
+    // load profiles on page load
+    loadProfiles();
+
+    // update profiles every 1 hour
+    setInterval(loadProfiles, 3600000);
+</script>
